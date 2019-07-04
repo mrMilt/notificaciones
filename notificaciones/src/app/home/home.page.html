@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Notificaciones
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item *ngIf="isNotificacion">
+    does not have notifications
+  </ion-item>
+    <!--<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>-->
+    <ion-list>
+        <ion-item *ngFor="let notificacion of notificaciones" (click)="verNotificacion(notificacion)" routerLink="/notificacion">
+      <div>
+          <ion-label>  
+        <b>{{notificacion.title}}</b>
+      </ion-label>
+      <p>{{notificacion.body}}</p>
+    </div>
+        </ion-item>        
+      </ion-list>
+      <!--</ion-refresher-content>
+  </ion-refresher>-->
+</ion-content>
