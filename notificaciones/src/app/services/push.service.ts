@@ -8,9 +8,11 @@ import { Storage } from '@ionic/storage';
 })
 export class PushService {
 
-  constructor(private oneSignal: OneSignal, private storage: Storage) { }
+  constructor(private oneSignal: OneSignal, private storage: Storage) {
+    
+   }
 
-  configuracion_inicial() {
+  configuracion_inicial() {   
     this.oneSignal.startInit('58140f30-9f11-458e-954a-394390d796ec', '72220784279');
 
     this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
@@ -18,7 +20,10 @@ export class PushService {
     this.oneSignal.handleNotificationReceived().subscribe((notification) => {
     // do something when notification is received
     console.log(notification);
-    environment.notificaciones.push(notification.payload);
+    if (environment.notificaciones == null) {
+      environment.notificaciones = [];
+    }
+    environment.notificaciones.unshift(notification.payload);
     this.storage.set('notificaciones', JSON.stringify(environment.notificaciones));
     });
 
